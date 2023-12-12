@@ -22,13 +22,14 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.myplanner.app.R
+import com.myplanner.app.ui.calendar.CalendarScreen
 import com.myplanner.app.util.CALENDAR
 import com.myplanner.app.util.MEMO
 import com.myplanner.app.util.NOTI
 import com.myplanner.app.util.SETTING
 
 @Composable
-fun MainPlannerApp() {
+fun MyPlannerApp() {
     val navController = rememberNavController()
     Scaffold(
         bottomBar = { BottomNavigation(navController = navController) }
@@ -90,10 +91,7 @@ sealed class BottomNavItem(
     val title: Int, val icon: Int, val screenRoute: String
 ) {
     object Calendar : BottomNavItem(R.string.nav_calendar, R.drawable.ic_launcher_foreground, CALENDAR)
-    object Todo : BottomNavItem(
-        R.string.nav_todo, R.drawable.ic_launcher_foreground,
-        com.myplanner.app.util.TODO
-    )
+    object Todo : BottomNavItem(R.string.nav_todo, R.drawable.ic_launcher_foreground, com.myplanner.app.util.TODO)
     object Memo : BottomNavItem(R.string.nav_memo, R.drawable.ic_launcher_foreground, MEMO)
     object Noti : BottomNavItem(R.string.nav_noti, R.drawable.ic_launcher_foreground, NOTI)
     object Setting : BottomNavItem(R.string.nav_setting, R.drawable.ic_launcher_foreground, SETTING)
