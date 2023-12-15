@@ -1,9 +1,12 @@
 package com.myplanner.app.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import java.time.LocalDate
 import javax.inject.Inject
 
@@ -11,12 +14,17 @@ import javax.inject.Inject
 class CalendarViewModel @Inject constructor(
 ) : ViewModel() {
     private var _date = MutableLiveData(LocalDate.now())
-    var date : LiveData<LocalDate> = _date
+    val date : LiveData<LocalDate> get() = _date
+
     fun onChangeDate(selectDate: LocalDate) {
-        _date.value = selectDate
+        viewModelScope.launch {
+            _date.value = selectDate
+            _date.postValue(selectDate)
+        }
+        Log.e("seok","${selectDate}")
     }
 
-    fun getViewModelDate() = date
+    fun getViewModelDate() = _date
 
 
 

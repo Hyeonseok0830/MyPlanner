@@ -8,11 +8,17 @@ import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.List
+import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -60,7 +66,7 @@ fun BottomNavigation(navController: NavHostController) {
             BottomNavigationItem(
                 icon = {
                     Icon(
-                        painter = painterResource(id = item.icon),
+                        imageVector = item.icon,
                         contentDescription = stringResource(id = item.title),
                         modifier = Modifier
                             .width(26.dp)
@@ -88,13 +94,13 @@ fun BottomNavigation(navController: NavHostController) {
 
 
 sealed class BottomNavItem(
-    val title: Int, val icon: Int, val screenRoute: String
+    val title: Int, val icon: ImageVector, val screenRoute: String
 ) {
-    object Calendar : BottomNavItem(R.string.nav_calendar, R.drawable.ic_launcher_foreground, CALENDAR)
-    object Todo : BottomNavItem(R.string.nav_todo, R.drawable.ic_launcher_foreground, com.myplanner.app.util.TODO)
-    object Memo : BottomNavItem(R.string.nav_memo, R.drawable.ic_launcher_foreground, MEMO)
-    object Noti : BottomNavItem(R.string.nav_noti, R.drawable.ic_launcher_foreground, NOTI)
-    object Setting : BottomNavItem(R.string.nav_setting, R.drawable.ic_launcher_foreground, SETTING)
+    object Calendar : BottomNavItem(R.string.nav_calendar, Icons.Filled.DateRange, CALENDAR)
+    object Todo : BottomNavItem(R.string.nav_todo, Icons.Filled.List, com.myplanner.app.util.TODO)
+    object Memo : BottomNavItem(R.string.nav_memo, Icons.Filled.Edit, MEMO)
+    object Noti : BottomNavItem(R.string.nav_noti, Icons.Filled.Notifications, NOTI)
+    object Setting : BottomNavItem(R.string.nav_setting, Icons.Filled.Settings, SETTING)
 }
 
 @Composable

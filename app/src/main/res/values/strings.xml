@@ -13,4 +13,7 @@
     <string name="nav_memo_desc">메모 화면</string>
     <string name="nav_noti_desc">알림 화면</string>
     <string name="nav_setting_desc">설정 화면</string>
+
+    <!-- calendar String -->
+    <string name="calendar_text_field">일정을 입력해 주세요</string>
 </resources>

@@ -5,7 +5,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -138,7 +137,7 @@ fun CalendarMonthItem(
     Column(modifier = modifier) {
         CalendarWeek()
         LazyVerticalGrid(
-            modifier = Modifier.height(430.dp),
+            modifier = Modifier.height(500.dp),
             columns = GridCells.Fixed(7)
         ) {
             for (i in 1 until firstDayOfWeek) { // 처음 날짜가 시작하는 요일 전까지 빈 박스 생성
@@ -167,7 +166,6 @@ fun CalendarMonthItem(
 
 @Composable
 fun CalendarDay(
-    isDarkTheme: Boolean = isSystemInDarkTheme(),
     modifier: Modifier = Modifier,
     date: LocalDate,
     isToday: Boolean,
@@ -187,6 +185,7 @@ fun CalendarDay(
                 interactionSource = interactionSource,
                 indication = noRipple
             ) {
+
                 onSelectedDate(date)
             }
             .background(if (isSelected) calendarSelectBackground() else calendarDefaultBackground())
@@ -213,8 +212,6 @@ fun CalendarDay(
                 modifier = Modifier
                     .size(4.dp)
                     .clip(shape = RoundedCornerShape(4.dp))
-
-
             )
         }
     }

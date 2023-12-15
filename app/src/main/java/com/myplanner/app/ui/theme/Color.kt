@@ -19,7 +19,7 @@ val pink = Color(0xFFEFB8C8)
 val yellow = Color(0xFFFFB800)
 
 val white01 = Color(0xFFE3F2FD)
-val grren01 = Color(0xFFDCEDC8)
+val green01 = Color(0xFFDCEDC8)
 val blue01 = Color(0xFF90CAF9)
 
 val transparent = Color(0x00000000)
