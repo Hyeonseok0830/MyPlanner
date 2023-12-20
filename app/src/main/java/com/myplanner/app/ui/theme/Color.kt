@@ -17,6 +17,7 @@ val white = Color(0xFFFFFFFF)
 val red = Color(0xFFFF4848)
 val pink = Color(0xFFEFB8C8)
 val yellow = Color(0xFFFFB800)
+val blue = Color(0xFF2196F3)
 
 val white01 = Color(0xFFE3F2FD)
 val green01 = Color(0xFFDCEDC8)

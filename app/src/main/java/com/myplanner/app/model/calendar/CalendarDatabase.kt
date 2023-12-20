@@ -7,10 +7,14 @@ import androidx.room.TypeConverters
 import java.time.LocalDate
 import java.time.LocalTime
 
-@Database(entities = [Calendar::class], version = 1)
+@Database(entities = [Calendar::class], version = 1, exportSchema = false)
 @TypeConverters(DateTimeConverter::class)
 abstract class CalendarDatabase : RoomDatabase() {
     abstract fun calendarDao(): CalendarDao
+
+    companion object {
+        const val DATABASE_NAME = "MyPlanner.db"
+    }
 }
 class DateTimeConverter {
 

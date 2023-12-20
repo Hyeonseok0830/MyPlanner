@@ -48,6 +48,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.myplanner.app.model.calendar.Calendar
 import com.myplanner.app.ui.theme.MyPlannerTheme
 import com.myplanner.app.ui.theme.black
 import com.myplanner.app.util.bottomSheetContainerColor
@@ -56,6 +57,8 @@ import com.myplanner.app.util.textFieldBackground
 import com.myplanner.app.viewmodel.CalendarViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import java.time.LocalDate
+import java.time.LocalTime
 
 
 @OptIn(ExperimentalMaterialApi::class, ExperimentalMaterial3Api::class)
@@ -87,7 +90,7 @@ fun CalendarScreen(
 @ExperimentalMaterialApi
 @Composable
 fun ModalBottomSheetScene() {
-    val state = rememberModalBottomSheetState(ModalBottomSheetValue.Expanded)
+    val state = rememberModalBottomSheetState(ModalBottomSheetValue.Hidden)
     val scope = rememberCoroutineScope()
     val focusManager = LocalFocusManager.current
 
@@ -182,11 +185,15 @@ private fun SheetContent(
                 placeholder = { Text("일정을 입력하세요") },
                 singleLine = true,
             )
+            val eventItem = Calendar(1,text.toString(),"서울", LocalDate.now(), LocalTime.now(),true,true)
             IconButton(modifier = Modifier
                 .align(Alignment.TopEnd)
                 .padding(10.dp),
                 onClick = {
-                    /*TODO ADD action*/
+                    scope.launch {
+                        viewModel.addEvent(eventItem)
+                    }
+
                 }) {
                 Icon(
                     imageVector = Icons.Filled.AddCircle,

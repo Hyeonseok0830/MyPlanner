@@ -5,12 +5,12 @@ import java.time.LocalTime
 
 data class CalendarEntity(
     val id: Int,
-    val title: String,
-    val location: String?,
-    val date: LocalDate,
-    val time: LocalTime?,
-    val isNotify: Boolean,
-    val isDone: Boolean
+    val title: String = "제목",
+    val location: String? = "서울",
+    val date: LocalDate = LocalDate.now(),
+    val time: LocalTime? = LocalTime.now(),
+    val isNotify: Boolean = true,
+    val isDone: Boolean = true
 )
 
 fun CalendarEntity.toDataEntity() = Calendar(

@@ -41,18 +41,19 @@ import androidx.lifecycle.LiveData
 import com.myplanner.app.ui.theme.BlackN12
 import com.myplanner.app.ui.theme.BoldN12
 import com.myplanner.app.ui.theme.MyPlannerTheme
+import com.myplanner.app.ui.theme.blue
+import com.myplanner.app.ui.theme.red
 import com.myplanner.app.util.NoRippleIndication
 import com.myplanner.app.util.calendarDefaultBackground
 import com.myplanner.app.util.calendarSelectBackground
 import com.myplanner.app.util.calendarSelectTextColor
 import com.myplanner.app.util.textColor
 import com.myplanner.app.viewmodel.CalendarViewModel
-import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
-import java.time.format.TextStyle
+import java.util.Calendar
 import java.util.Locale
 
 
@@ -140,7 +141,7 @@ fun CalendarMonthItem(
             modifier = Modifier.height(500.dp),
             columns = GridCells.Fixed(7)
         ) {
-            for (i in 1 until firstDayOfWeek) { // 처음 날짜가 시작하는 요일 전까지 빈 박스 생성
+            for (i in 1..firstDayOfWeek) { // 처음 날짜가 시작하는 요일 전까지 빈 박스 생성
                 item {
                     Box(
                         modifier = Modifier
@@ -181,7 +182,7 @@ fun CalendarDay(
             .size(70.dp)
             .padding(1.dp)
             .clip(shape = RoundedCornerShape(5.dp))
-            .clickable (
+            .clickable(
                 interactionSource = interactionSource,
                 indication = noRipple
             ) {
@@ -204,9 +205,8 @@ fun CalendarDay(
             textAlign = TextAlign.Center,
             text = date.dayOfMonth.toString(),
             style = BoldN12,
-            color = textColor
+            color = if(date.dayOfWeek.value==7) red else if(date.dayOfWeek.value==6) blue else textColor
         )
-
         if (hasEvent) {
             Box(
                 modifier = Modifier
@@ -221,16 +221,18 @@ fun CalendarDay(
 fun CalendarWeek(
     modifier: Modifier = Modifier
 ) {
+    val weekStr = listOf<String>("일","월","화","수","목","금","토")
     Row(modifier) {
-        DayOfWeek.values().forEach { dayOfWeek ->
+        for (i in 0 until Calendar.DAY_OF_WEEK) {
             Text(
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f),
-                text = dayOfWeek.getDisplayName(TextStyle.NARROW, Locale.KOREAN),
+                text = weekStr[i],
+                //text = dayOfWeek.getDisplayName(TextStyle.NARROW, Locale.KOREAN),
                 style = BlackN12,
                 textAlign = TextAlign.Center,
-                color = textColor()
+                color = if(i==0) red else if(i==6) blue else textColor()
             )
         }
     }
